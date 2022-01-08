@@ -1,2 +1,2 @@
 # ChatGroup
-My chat app for a group communication
+A single room Client-Server chat for Windows
