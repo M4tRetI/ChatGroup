@@ -189,8 +189,8 @@ public class GUI implements Runnable {
     void chatAppendText (String text) throws BadLocationException {
     	HTMLDocument doc = (HTMLDocument) chatTextPane.getStyledDocument ();
     	try { doc.insertAfterEnd(doc.getCharacterElement (doc.getLength () < 1 ? 0 : doc.getLength () - 1), text + "<br>"); }
-    	catch (IOException e) {
-    		consolePrint ("Uno o più messaggi non sono visibili nella chat", 1);
+    	catch (Exception e) {
+    		consolePrint ("Uno o più messaggi non sono visibili o corrotti nella chat", 1);
     	}
 		scrollToBottom ();
     }
