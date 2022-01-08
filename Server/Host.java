@@ -8,6 +8,8 @@ import java.nio.charset.StandardCharsets;
 public class Host {
 	Socket s;
 	String IP;
+	boolean nicknameReceived;
+	String nick;
 	
 	OutputStreamWriter osw;
 	
@@ -17,6 +19,22 @@ public class Host {
 		s = _s;
 		IP = s.getInetAddress ().getHostAddress ();
 		osw = new OutputStreamWriter (s.getOutputStream (), StandardCharsets.UTF_8);
+		nicknameReceived = false;
+		nick = IP;
+	}
+	
+	public boolean isNicknameReceived () {
+		return nicknameReceived;
+	}
+	public void setNicknameReceived () {
+		nicknameReceived = true;
+	}
+	
+	public String getNickname () {
+		return nick;
+	}
+	public void setNickname (String _n) {
+		nick = _n;
 	}
 
 	public void closeCommunication () throws IOException {

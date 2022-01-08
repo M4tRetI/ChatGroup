@@ -39,14 +39,14 @@ public class ChatServer {
 	 * @param blackList lista degli host a cui non inviare il messaggio, 
 	 * 				    normalmente l'host che invia il messaggio dovrebbe essere in questa lista
 	 * */
-	public synchronized static void sendBroadcast (String msg, ArrayList <Host> blackList) {
+	public synchronized static void sendBroadcast (String msg, String nick, ArrayList <Host> blackList) {
 		Vector <Host> toDelete = new Vector <Host> ();
 		connectedHosts.forEach((host) -> {
 			if (blackList.contains(host)) return;
 			
 			try {
 				try {
-					host.write ("<strong>" + host.getIP () + "></strong> " + msg);
+					host.write ("<strong>" + nick + "></strong> " + msg);
 				} catch (SocketException se) {
 					System.out.println (host.getIP () + " si è disconesso");
 					toDelete.add (host);

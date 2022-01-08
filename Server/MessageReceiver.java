@@ -33,8 +33,13 @@ public class MessageReceiver implements Runnable {
 			} catch (IOException e) {
 				System.out.println ("Errore durante la ricezione del messaggio da parte di " + _h.getIP ());
 			}
-			
-			if (msg != null) ChatServer.sendBroadcast(msg, blackList);
+			if (msg != null) {
+				if (!_h.isNicknameReceived ()) {
+					_h.setNickname (msg);
+					_h.setNicknameReceived ();
+					ChatServer.sendBroadcast(msg, _h.getNickname (), blackList);
+				}
+			}
 		}
 	}
 }

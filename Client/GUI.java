@@ -21,6 +21,7 @@ public class GUI implements Runnable {
     JScrollPane jspChatTextPane = null;
     static JLabel logConsole = null;
     String chat_ip = null;		// Non fare troppo riferimento. Cambia con il JDialog
+    String my_nickname = null;
     
 	@Override
 	public void run () {
@@ -77,7 +78,7 @@ public class GUI implements Runnable {
     }
     
     JOptionPane createIPDialog () {
-    	JPanel p = new JPanel (new GridLayout (2, 1, 0, 10));
+    	JPanel p = new JPanel (new GridLayout (3, 1, 0, 10));
     	
     	JTextField connectIPInput = new JTextField (12);
     	connectIPInput.getDocument ().addDocumentListener (new DocumentListener () {
@@ -88,11 +89,23 @@ public class GUI implements Runnable {
     		}
     	});
     	
-        JLabel connectLabel = new JLabel ("Inserisci l'IP della chat");
+    	JTextField connectNickname = new JTextField (12);
+    	connectNickname.getDocument ().addDocumentListener (new DocumentListener () {
+	        public void insertUpdate(DocumentEvent e) { changedUpdate(e); }
+	        public void removeUpdate(DocumentEvent e) { changedUpdate(e); }
+            public void changedUpdate (DocumentEvent e) {
+    			my_nickname = connectNickname.getText ().trim ();
+    			if (my_nickname == "") my_nickname = null;
+    		}
+    	});
+    	
+        JLabel connectLabel = new JLabel ("Inserisci il tuo nickname e l'IP della chat");
         connectIPInput.setFont (font400);
+        connectNickname.setFont (font400);
         connectLabel.setFont(font800);
         
         p.add (connectLabel);
+        p.add (connectNickname);
         p.add (connectIPInput);
         
         Object[] options = { "Connetti", "Cancella" };
@@ -112,7 +125,7 @@ public class GUI implements Runnable {
 				if (new IPVerifier ().verify (chat_ip)) {
 					try { chatAppendText ("Mi sto connettendo a " + chat_ip + "..."); }
 					catch (BadLocationException exc) {}
-					Chat.connect (chat_ip);
+					Chat.connect (chat_ip, my_nickname);
 				}
 			}
 		}
@@ -154,7 +167,7 @@ public class GUI implements Runnable {
     	        	if (textToSend.length () < 1) return;
     	        	try {
     	        		Chat.send (textToSend);
-    	        		chatAppendText ("YOU> " + textToSend);
+    	        		chatAppendText ("<strong>YOU</strong>> " + textToSend);
     	        		taSendMsg.setText ("");
     	        	} catch (BadLocationException exc) {}
     	        }
