@@ -48,7 +48,7 @@ public class ChatServer {
 			try {
 				try {
 					String msg_css = "color: " + h.getColor () + "; font-weight: bold;";
-					host.write ("<span style='" + msg_css + "'>" + h.getNickname () + "></span> " + msg);
+					host.write ("<span style='" + msg_css + "'>" + h.getNickname () + "</span>> " + msg);
 				} catch (SocketException se) {
 					System.out.println (host.getIP () + " si è disconesso");
 					toDelete.add (host);

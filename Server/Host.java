@@ -6,6 +6,9 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 public class Host {
+	public static final String UNKNOWN_HOST_PREFIX = "Anonymous_";
+	static int unknownHostsNumber = 0;
+	
 	Socket s;
 	String IP;
 	boolean nicknameReceived;
@@ -32,7 +35,10 @@ public class Host {
 	public boolean isNicknameReceived () { return nicknameReceived; }
 	public void setNicknameReceived () { nicknameReceived = true; }
 	public String getNickname () { return nick; }
-	public void setNickname (String _n) { nick = _n; }
+	public void setNickname (String _n) {
+		if (!_n.equals ("null")) { nick = _n; }
+		else { nick = UNKNOWN_HOST_PREFIX + unknownHostsNumber ++; }
+	}
 	public String getColor () { return color; }
 
 	public void closeCommunication () throws IOException {

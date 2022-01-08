@@ -95,7 +95,7 @@ public class GUI implements Runnable {
 	        public void removeUpdate(DocumentEvent e) { changedUpdate(e); }
             public void changedUpdate (DocumentEvent e) {
     			my_nickname = connectNickname.getText ().trim ();
-    			if (my_nickname == "") my_nickname = null;
+    			if (my_nickname.equals ("")) my_nickname = null;
     		}
     	});
     	
