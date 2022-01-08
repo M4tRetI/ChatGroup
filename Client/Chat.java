@@ -37,6 +37,7 @@ public class Chat {
 	public static void chatClosed () {
 		if (s != null) {
 			print ("Ti stai disconnettendo dalla chat...");
+			GUI.consolePrint ("Disconnesso", 0);
 			try { s.closeCommunication (); } catch (IOException e) {}
 		}
 	}

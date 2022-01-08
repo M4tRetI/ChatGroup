@@ -24,7 +24,7 @@ public class GUI implements Runnable {
     
 	@Override
 	public void run () {
-		JFrame frame = new JFrame ("Chat ad unica stanza | Created by Matteo Remorini © 2021");
+		JFrame frame = new JFrame ("Chat ad unica stanza | Created by Matteo Remorini ï¿½ 2021");
 
     	try { UIManager.setLookAndFeel (UIManager.getSystemLookAndFeelClassName ()); }
     	catch (Exception e) {}
@@ -62,6 +62,11 @@ public class GUI implements Runnable {
     	        ipDialog.setVisible (true);
     	    }
     	});
+    	JMenuItem disconnectItem = new JMenuItem (new AbstractAction("Disconnetti...") {
+    	    public void actionPerformed (ActionEvent e) {
+    	    	Chat.chatClosed ();
+    	    }
+    	});
     	JMenuItem wipeChatMenu = new JMenuItem (new AbstractAction("Cancella il contenuto della chat") {
     	    public void actionPerformed (ActionEvent e) {
     	    	if (chatTextPane == null) return;
@@ -71,6 +76,7 @@ public class GUI implements Runnable {
     	    }
     	});
     	connectMenu.add (connectItem);
+    	connectMenu.add (disconnectItem);
     	menuBar.add (connectMenu);
     	menuBar.add(wipeChatMenu);
     	return menuBar;
@@ -177,7 +183,7 @@ public class GUI implements Runnable {
     	HTMLDocument doc = (HTMLDocument) chatTextPane.getStyledDocument ();
     	try { doc.insertAfterEnd(doc.getCharacterElement (doc.getLength () < 1 ? 0 : doc.getLength () - 1), text + "<br>"); }
     	catch (IOException e) {
-    		consolePrint ("Uno o più messaggi non sono visibili nella chat", 1);
+    		consolePrint ("Uno o piï¿½ messaggi non sono visibili nella chat", 1);
     	}
 		scrollToBottom ();
     }
