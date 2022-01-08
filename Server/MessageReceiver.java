@@ -35,7 +35,7 @@ public class MessageReceiver implements Runnable {
 			}
 			if (msg != null) {
 				if (_h.isNicknameReceived ()) {
-					ChatServer.sendBroadcast(msg, _h.getNickname (), blackList);
+					ChatServer.sendBroadcast(_h, msg, blackList);
 				} else {
 					_h.setNickname (msg);
 					_h.setNicknameReceived ();

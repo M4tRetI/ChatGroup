@@ -10,6 +10,7 @@ public class Host {
 	String IP;
 	boolean nicknameReceived;
 	String nick;
+	String color;
 	
 	OutputStreamWriter osw;
 	
@@ -21,21 +22,18 @@ public class Host {
 		osw = new OutputStreamWriter (s.getOutputStream (), StandardCharsets.UTF_8);
 		nicknameReceived = false;
 		nick = IP;
+		color = "000";
+	}
+	Host (Socket _s, String _color) throws IOException {
+		this (_s);
+		color = _color;
 	}
 	
-	public boolean isNicknameReceived () {
-		return nicknameReceived;
-	}
-	public void setNicknameReceived () {
-		nicknameReceived = true;
-	}
-	
-	public String getNickname () {
-		return nick;
-	}
-	public void setNickname (String _n) {
-		nick = _n;
-	}
+	public boolean isNicknameReceived () { return nicknameReceived; }
+	public void setNicknameReceived () { nicknameReceived = true; }
+	public String getNickname () { return nick; }
+	public void setNickname (String _n) { nick = _n; }
+	public String getColor () { return color; }
 
 	public void closeCommunication () throws IOException {
 		s.close ();

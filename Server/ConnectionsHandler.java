@@ -12,7 +12,7 @@ public class ConnectionsHandler implements Runnable {
 	public void run () {
 		while (true) {
 			try {
-				Host newHost = new Host (_ss.accept());
+				Host newHost = new Host (_ss.accept(), Utils.generateColour ());
 				boolean ok = sendHello (newHost);
 				ok &= ChatServer.addHost(newHost);
 				if (!ok) {
