@@ -25,7 +25,7 @@ public class GUI implements Runnable {
     
 	@Override
 	public void run () {
-		JFrame frame = new JFrame ("Chat ad unica stanza | Created by Matteo Remorini ï¿½ 2021");
+		JFrame frame = new JFrame ("Chat ad unica stanza | Created by Matteo Remorini © 2021");
 
     	try { UIManager.setLookAndFeel (UIManager.getSystemLookAndFeelClassName ()); }
     	catch (Exception e) {}
