@@ -35,18 +35,20 @@ public class ChatServer {
 	
 	/**
 	 * Manda a tutti gli host connessi al server della chat il messaggio ricevuto da un host
+	 * @param h host che ha inviato il messaggio
 	 * @param msg messaggio da inoltrare
 	 * @param blackList lista degli host a cui non inviare il messaggio, 
 	 * 				    normalmente l'host che invia il messaggio dovrebbe essere in questa lista
 	 * */
-	public synchronized static void sendBroadcast (String msg, ArrayList <Host> blackList) {
+	public synchronized static void sendBroadcast (Host h, String msg, ArrayList <Host> blackList) {
 		Vector <Host> toDelete = new Vector <Host> ();
 		connectedHosts.forEach((host) -> {
 			if (blackList.contains(host)) return;
 			
 			try {
 				try {
-					host.write ("<strong>" + host.getIP () + "></strong> " + msg);
+					String msg_css = "color: " + h.getColor () + "; font-weight: bold;";
+					host.write ("<span style='" + msg_css + "'>" + h.getNickname () + "</span>> " + msg);
 				} catch (SocketException se) {
 					System.out.println (host.getIP () + " si è disconesso");
 					toDelete.add (host);

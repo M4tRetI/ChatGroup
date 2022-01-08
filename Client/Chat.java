@@ -12,9 +12,13 @@ public class Chat {
 		new Thread (gui).start ();
 	}
 	
-	public static void connect (String chat_ip) {
-		try { s = new Server (new Socket (chat_ip, 4000)); }
-		catch (Exception e) {
+	public static void connect (String chat_ip, String nickname) {
+		try {
+			GUI.consolePrint ("Tentativo di connessione", 0);
+			s = new Server (new Socket (chat_ip, 4000));
+			s.write (nickname);
+			GUI.consolePrint ("Connessione stabilita. Sei dentro :)", 0);
+		} catch (Exception e) {
 			GUI.consolePrint ("Impossibile contattare il server", 2);
 			print ("Chat non raggiungibile");
 			s = null;
